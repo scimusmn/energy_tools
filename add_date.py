@@ -9,7 +9,6 @@ Options:
     -h --help    Show this help.
     --version    Show version number.
 
-@TODO - This is not tested yet
 """
 from docopt import docopt
 import csv
@@ -17,10 +16,7 @@ import datetime
 
 
 def excel_date(date1):
-    """Turn a date object into an Excel date string
-
-    @TODO - This is not tested yet
-    """
+    """Turn a date object into an Excel date string """
     temp = datetime.datetime(1899 + 4, 12, 31)
     delta = date1 - temp
     return float(delta.days) + (float(delta.seconds) / 86400)
