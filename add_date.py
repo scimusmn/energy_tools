@@ -1,11 +1,19 @@
-import csv
-import datetime
+"""Add date
 
+Usage:
+    add_date.py <input_file> <output_file>
+    add_date.py (-h | --help)
+    add_date.py --version
 
-"""Turn a date object into an Excel date string
+Options:
+    -h --help    Show this help.
+    --version    Show version number.
 
 @TODO - This is not tested yet
 """
+from docopt import docopt
+import csv
+import datetime
 
 
 def excel_date(date1):
@@ -42,5 +50,6 @@ def add_date():
             writer.writerows(all)
 
 
-if __name__ == '__main__':
-    add_date()
+if __name__ == "__main__":
+    args = docopt(__doc__, version='Add Date 0.1')
+    add_date(args['<input_file>'], args['<output_file>'])
