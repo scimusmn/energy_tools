@@ -26,26 +26,28 @@ def excel_date(date1):
     return float(delta.days) + (float(delta.seconds) / 86400)
 
 
-"""Add a datetime string to the CSV
+def add_date(input_file, output_file):
+    """Add a datetime string to the CSV
 
-@TODO - Add an argument to the script to pass the input and output files
-"""
-
-
-def add_date():
-    with open('15_int.csv', 'r') as csvinput:
-        with open('15_int_date.csv', 'w') as csvoutput:
+    @TODO - Add an argument to the script to pass the input and output files
+    """
+    with open(input_file, 'r') as csvinput:
+        with open(output_file, 'w') as csvoutput:
             writer = csv.writer(csvoutput, lineterminator='\r')
             reader = csv.reader(csvinput)
 
             all = []
+            # Skip the headers
+            for _ in xrange(3):
+                next(reader)
             for row in reader:
                 row_year = row[1]
                 day_of_year = row[2]
                 minutes_of_day = row[3]
                 year_start = datetime.datetime(int(row_year), 1, 1)
                 day_delta = datetime.timedelta(int(day_of_year) - 1, minutes=int(minutes_of_day))
-                row_date = year_start + day_delta
+                #row_date = year_start + day_delta
+                row_date = excel_date(year_start + day_delta)
                 print row_date
                 row.insert(4, row_date)
 
