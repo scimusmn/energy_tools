@@ -17,7 +17,11 @@ import datetime
 
 
 def excel_date(date1):
-    temp = datetime.datetime(1899 + 4, 12, 30)
+    """Turn a date object into an Excel date string
+
+    @TODO - This is not tested yet
+    """
+    temp = datetime.datetime(1899 + 4, 12, 31)
     delta = date1 - temp
     return float(delta.days) + (float(delta.seconds) / 86400)
 
