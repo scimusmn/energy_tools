@@ -33,7 +33,12 @@ def make_graph(input_file):
         next(reader)
 
     for line in reader:
-        date.append(line[4])
+        # Convert ISO datetime to Python date
+        python_datetime = dateutil.parser.parse(line[4])
+        # Convert Python datetime to MatPlotLib format
+        matplotlib_datetime = mdates.date2num(python_datetime)
+        # Add date and values to graph data set
+        date.append(matplotlib_datetime)
         buy.append(line[5])
 
     matplotlib.pyplot.scatter(date, buy)
