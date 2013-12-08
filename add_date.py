@@ -42,10 +42,10 @@ def add_date(input_file, output_file):
                 minutes_of_day = row[3]
                 year_start = datetime.datetime(int(row_year), 1, 1)
                 day_delta = datetime.timedelta(int(day_of_year) - 1, minutes=int(minutes_of_day))
-                #row_date = year_start + day_delta
-                row_date = excel_date(year_start + day_delta)
-                print row_date
-                row.insert(4, row_date)
+                row_date = year_start + day_delta
+                iso_date = row_date.isoformat()
+                #row_date = excel_date(year_start + day_delta)
+                row.insert(4, iso_date)
 
                 all.append(row)
 
