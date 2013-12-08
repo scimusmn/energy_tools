@@ -25,7 +25,7 @@ def getColumn(filename, column):
 
 
 def make_graph(input_file):
-    reader = csv.reader(open(input_file))
+    reader = csv.reader(open(input_file, 'rU'))
     date = []
     buy = []
 
