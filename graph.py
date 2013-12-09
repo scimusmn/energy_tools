@@ -12,8 +12,9 @@ Options:
 """
 from docopt import docopt
 import csv
-import matplotlib
-import pylab
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import dateutil
 
 
 def getColumn(filename, column):
@@ -41,7 +42,24 @@ def make_graph(input_file):
         date.append(matplotlib_datetime)
         buy.append(line[5])
 
-    matplotlib.pyplot.scatter(date, buy)
+    # Create figure and line subplots
+    fig, ax = plt.subplots()
+    ax.plot(date, buy)
+
+    # Format ticks at every year
+    years = mdates.YearLocator()
+    ax.xaxis.set_major_locator(years)
+
+    # Format the tick labels
+    yearsFmt = mdates.DateFormatter('%Y')
+    ax.xaxis.set_major_formatter(yearsFmt)
+
+    # Format the coords message box
+    ax.format_xdata = mdates.DateFormatter('%Y-%m-%dT%H:%M:%S')
+
+    # Format the X axis dates, by tilting, right aligning, and padding.
+    fig.autofmt_xdate()
+    plt.show()
 
 
 if __name__ == "__main__":
